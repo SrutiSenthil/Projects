@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_student_login_form"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.sri.bustracking.StudentLoginFormActivity">
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:text="Name:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/namelbl"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/nameval"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:text="Username:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unamelbl"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/unameval"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:text="College:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/collegelbl"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/collegeval"
+            android:layout_weight="1" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="49dp">
+
+        <TextView
+            android:text="Email:"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emaillbl"
+            android:layout_weight="1"
+            android:textStyle="bold" />
+
+        <TextView
+            android:text=""
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/emailval"
+            android:layout_weight="1" />
+
+
+    </LinearLayout>
+
+    <Button
+        android:text="list of buses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/listbus"
+        android:layout_gravity="center" />
+
+    <Button
+        android:text="available buses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/availablebus"
+        android:layout_gravity="center" />
+
+    <Button
+        android:text="show all buses"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/showallbus"
+        android:layout_gravity="center" />
+
+</LinearLayout>

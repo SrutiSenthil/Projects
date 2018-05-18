@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Image Generator</title>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/Properties.js"></script>
+<script type="text/javascript" src="js/Application.js"></script>
+<script type="text/javascript" src="js/Controller.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+.scrollable {
+    height: 250px; /* or any value */
+    overflow-y: auto;
+}
+body{
+       background-image: url(images/imagebg.jpg);
+       background-repeat: no-repeat;
+       background-size: cover;
+}
+.border{
+       border-radius: 25px;
+       padding: 20px;
+}
+.buttonStyle{
+       font-size:12px;
+}
+</style>
+</head>
+<body ng-app="Application">
+<div class="container-fluid">
+       <div>
+              <div class="row">
+                     <h2 class="text-center">Image Generator</h2>
+              </div>
+       </div>
+       <div class="col-md-4 col-md-offset-1 border" style="background-color: #9B9796;">
+       <br><br>
+              <div class="form-group">
+              <label>Source:</label><input type="text" class="form-control" ng-model="image.imgSource" value="http://">
+              </div>
+              <div class="form-group">
+              <label>Description:</label><input type="text" class="form-control" ng-model="image.imgDescription">
+              </div>
+              
+              
+              <label>Width:</label>
+              <form class="form-inline">
+              <div class="form-group">
+              <input type="text"  ng-model="image.imgWidth" style="width: 75%" class="form-control">
+              <select class="form-control" ng-model="image.imgWidthType" style="width: 23.5%">
+              <option value="%">%</option>
+              <option value="px">px</option>
+              </select>
+              </div>
+              </form>
+              
+              <label>Height:</label>
+              <form class="form-inline">
+              <div class="form-group">
+              <input type="text"  ng-model="image.imgHeight" style="width: 75%" class="form-control">
+              <select class="form-control" ng-model="image.imgHeightType" style="width: 23.5%" required="required">
+              <option value="%">%</option>
+              <option value="px">px</option>
+              </select>
+              </div>
+              </form>
+              
+              <div class="form-group">
+              <label>Float:</label>
+              <select class="form-control" ng-model="image.imgFloat">
+              <option value="">None</option>
+              <option value="Left">Left</option>
+              <option value="Right">Right</option>
+              
+              </select>
+              
+              </div>
+       <div class="row">
+              <div class="col-md-6">
+                     <input type="submit" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate Html" ng-click="imageClickFunction()">
+              </div>
+              <div class="col-md-6">
+                     <a href="api/Image/Image.html"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download HTML"></a>
+              </div>
+              </div>
+              <br>
+              <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                           <input type="button" class="btn btn-warning btn-lg btn-block buttonStyle" ng-click="myfunc()" ng-model="imageValue" value="Show Preview">
+                    </div>
+                    <div class="col-md-3"></div>
+              </div>
+              <br>
+              <div class="row">
+                    <div ng-show="imageValue" class="scrollable" style="background-color: white">
+                                  <span ng-bind-html="imageValue"></span>
+                            </div>
+                       </div>
+       </div>
+    <div class="col-md-4 col-md-offset-2 border" style="background-color: #9B9796;">
+       <div class="form-group">
+                    <label>Border Radius</label>
+            <input type="text" ng-model="cssimage.borderRadius" class="form-control" style="width: 75%;">      
+        </div>
+        <div class="form-group">
+             <label>Filter</label>
+            <select class="form-control" ng-model="cssimage.filterType" style="width: 75%">
+            <option value="">--Select--</option>
+                <option value="blur">Blur</option>
+                <option value="brightness">Brightness</option>
+                <option value="contrast">Contrast</option>
+                <option value="grayscale">GrayScale</option>
+                <option value="huerotate">HueRotate</option>
+                <option value="invert">Invert</option>
+                <option value="opacity">Opacity</option>
+                <option value="saturate">Saturate</option>
+                <option value="sepia">Sepia</option>
+                <option value="shadow">Shadow</option>
+            </select>
+        </div>
+        <div ng-switch="cssimage.filterType" class="form-group">
+            <div ng-switch-when="blur" class="form-group">
+            <label>Blur Value</label>
+                <input type="text" ng-model="cssimage.blurValue" placeholder="in px" style="width: 20%;" class="form-control">
+            </div>
+            <div ng-switch-when="brightness" class="form-group">
+            <label>Brightness Value</label>
+                <input type="text" ng-model="cssimage.brightnessValue" placeholder="in %" style="width: 20%;" class="form-control">
+            </div>
+            <div ng-switch-when="contrast" class="form-group">
+                <label>Contrast Value</label>
+                <input type="text" ng-model="cssimage.contrastValue" placeholder="in %" style="width: 20%;" class="form-control">
+            </div>
+            <div ng-switch-when="grayscale" class="form-group">
+                <label>Grayscale Value</label>
+                <input type="text" ng-model="cssimage.grayscaleValue" placeholder="in %" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="huerotate" class="form-group">
+                <label>HueRotate Value</label>
+                <input type="text" ng-model="cssimage.huerotateValue" placeholder="in deg" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="invert" class="form-group">
+                <label>Invert Value</label>
+                <input type="text" ng-model="cssimage.invertValue" placeholder="in %" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="opacity" class="form-group">
+               <label>Opacity Value</label>
+              <input type="text" ng-model="cssimage.opacityValue" placeholder="in %" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="saturate" class="form-group">
+               <label>Saturate Value</label>
+               <input type="text" ng-model="cssimage.saturateValue" placeholder="Value" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="sepia" class="form-group">
+               <label>Sepia Value</label>
+               <input type="text" ng-model="cssimage.sepiaValue" placeholder="in %" style="width: 20%;" class="form-control">
+           </div>
+           <div ng-switch-when="shadow" class="form-group">
+               <label>Shadow Value</label>
+               <div class="row">
+                   <div class="col-md-3">
+                       <input type="text" ng-model="cssimage.shadowValue1" placeholder="in px" class="form-control">
+                   </div>
+                   <div class="col-md-3">
+                       <input type="text" ng-model="cssimage.shadowValue2" placeholder="in px" class="form-control">
+                   </div>
+                   <div class="col-md-3">
+                       <input type="text" ng-model="cssimage.shadowValue3" placeholder="in px"  class="form-control">
+                   </div>
+                   <div class="col-md-3">
+                       <input type="color" ng-model="cssimage.shadowColor" class="form-control">
+                   </div>
+               </div>
+            </div>
+         </div>
+         <div class="form-group">
+             <input type="checkbox" ng-model="cssimage.polaroid" ng-true-value="'Y'" ng-false-value="'N'"><b>Do you need Polaroid image cards effect?</b>
+         </div>
+         <div class="form-group">
+             <input type="checkbox" ng-model="cssimage.flip" ng-true-value="'Y'" ng-false-value="'N'"><b>Do you need the image to flip?</b>
+         </div>
+         <div class="row">
+             <div class="col-md-6">
+             <input type="submit" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate CSS" ng-click="cssimageClickFunction()">
+             </div>
+             <div class="col-md-6">
+                           <a href="api/Image/Imagecss.css"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download CSS"></a>
+                     </div>
+          </div>
+       </div>
+       </div> 
+</body>
+</html>

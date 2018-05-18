@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Content</title>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/Properties.js"></script>
+<script src="js/ApplicationDynamic.js"></script>
+<script src="js/ControllerDynamic.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style type="text/css">
+.border{
+	border-radius: 25px;
+	padding: 25px;
+}
+body{
+	background-image: url(images/content1.jpg);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: cover;
+}
+</style>
+</head>
+<body ng-app="App" ng-controller="ContentGeneratorController">
+	<div>
+		<div class="row">
+			<h2 class="text-center" id="id1">Content Generator</h2>
+		</div>
+	</div><br>
+	<div class="container">
+		<div class="row">
+		<div class="col-md-4 col-md-offset-1 ">
+			<div class="border">
+				<div class="row form-group">
+					<label>Content</label>
+					<textarea class="form-control" rows="10" cols="50" ng-model="content.description"> Write Description here</textarea>
+				</div>
+			</div>
+			<br>
+			<br>
+			<div class="border">
+				<div class="form-group">
+					<label id="id1">Template Position:</label>
+					<select class="form-control" ng-model="content.position" >
+						<option value="">--Select--</option>
+						<option value="left">Left</option>
+						<option value="right">Right</option>
+						<option value="top">Top</option>
+					</select>
+				</div>
+			</div>
+			</div>
+			<div class="col-md-4 col-md-offset-2 border" >
+				<div class="row">
+					<label> Choose font styles</label>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font Family:</label>
+							<select class="form-control" ng-model="content.fontFamily">
+								<option value="">--Select--</option>
+								<option value="Times New Roman">TimesNewRoman</option>
+								<option value="Arial">Arial</option>
+								<option value="Helvetica">Helvetica</option>
+								<option value="Times">Times</option>
+								<option value="Courier New">Courier New</option>
+								<option value="Courier">Courier</option>
+								<option value="Verdana">Verdana</option>
+								<option value="Georgia">Georgia</option>
+								<option value="Palatino">Palatino</option>
+								<option value="Garamond">Garamond</option>
+								<option value="Bookman">Bookman</option>
+								<option value="Comic Sans MS">Comic Sans MS</option>
+								<option value="Trebuchet MS">Trebuchet MS</option>
+								<option value="Arial Black">Arial Black</option>
+								<option value="Impact">Impact</option>
+								<option value="sans-serif">sans-serif</option>
+								<option value="fantasy">fantasy</option>
+								<option value="cursive">cursive</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font size:</label>
+							<input type="number" min="1" max="100" class="form-control" placeholder="in-px" ng-model="content.fontSize">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font-style:</label>
+							<select class="form-control" ng-model="content.fontStyle">
+								<option value="">--Select--</option>
+								<option value="normal">normal</option>
+								<option value="italic">italic</option>
+								<option value="oblique">oblique</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font weight:</label>
+							<input type="number" min="100" max="900" step="100" class="form-control" ng-model="content.fontWeight">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font-Varient:</label>
+							<select class="form-control" ng-model="content.fontVarient">
+								<option value="">--Select--</option>
+								<option value="normal">normal</option>
+								<option value="small-caps">small-caps</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-md-5 col-md-offset-1">
+						<div class="row form-group">
+							<label>Font-Color:</label>
+							<input type="color" class="form-control" ng-model="content.fontColor">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br><br><br>
+ <div class="col-md-4 col-md-offset-4 border">
+	<div class="col-md-4 col-md-offset-1"> 
+    	<input type="button" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate" ng-click="dcontentfunc()">
+    </div>
+   	<div class="col-md-4 col-md-offset-2">
+    	<input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Send">
+    </div>
+</div>
+</body>
+</html>

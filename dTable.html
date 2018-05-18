@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Table Generator</title>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/Properties.js"></script>
+<script src="js/ApplicationDynamic.js"></script>
+<script src="js/ControllerDynamic.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+body{
+	background-image: url(images/divtableimage.jpg);
+	background-repeat: no-repeat;
+	background-size: cover;
+}
+.border{
+	border-radius: 25px;
+	padding: 20px;
+}
+#id1{
+	color: white;
+}
+.buttonStyle{
+	font-size:12px;
+}
+</style>
+</head>
+<body  ng-app="App" ng-controller="TableGeneratorController">
+<div class="container-fluid">
+	<div>
+		<div class="row">
+			<h2 class="text-center" id="id1">Table Generator</h2>
+		</div>
+	</div>
+	<br>
+	<div class="row">
+		<div class="col-md-4 col-md-offset-1">
+		<div class="border" style="background-color: #5E7175;">
+			<br>
+	 		<div class="form-group">
+	 			<label id="id1"> No of rows:</label>
+	 			<input type ="text" class = "form-control" ng-model="table.noOfRows" style="width:75%"><br> <br>
+	 		</div>
+	 		<div class="form-group">
+	 			<label id="id1"> No of columns: </label>
+	 			<input type ="text" class = "form-control" ng-model="table.noOfColumns" style="width:75%"><br>
+	 		</div>
+		</div>
+		<br>
+		<br>
+		<div class="border" style="background-color: #5E7175;">
+			<div class="form-group">
+				<label id="id1">Template Position:</label>
+				<select class="form-control" ng-model="table.position" >
+					<option value="">--Select--</option>
+					<option value="left">Left</option>
+					<option value="right">Right</option>
+				</select>
+			</div>
+		</div>
+		</div>
+		<div class="col-md-4 col-md-offset-2 border" style="background-color: #5E7175;">
+			<div class="form-group">
+				<label id="id1">Table Borders:</label>
+				<br>
+				<div class="row">
+					<div class="col-md-4 form-group">
+						<label id="id1">Border Width:</label>
+						<input type="number" class="form-control" ng-model="table.borderWidth" min="1" max="5"> 
+					</div>
+					<div class="col-md-4 form-group">
+						<label id="id1">Border Style:</label>
+						<select class="form-control" ng-model="table.borderStyle" >
+							<option value="">--Select--</option>
+							<option value="dotted">dotted</option>
+							<option value="dashed">dashed</option>
+							<option value="solid">solid</option>
+							<option value="double">double</option>
+							<option value="groove">groove</option>
+							<option value="ridge">ridge</option>
+							<option value="inset">inset</option>
+							<option value="outset">outset</option>
+							<option value="none">none</option>
+							<option value="hidden">hidden</option>
+						</select>
+					</div>
+					<div class="col-md-4 form-group">
+						<label id="id1">Border Color:</label>
+						<input type="color" class="form-control" ng-model="table.borderColor"> 
+					</div>
+				</div>
+			</div> 
+			<div class="form-group">
+				<input type="checkbox" ng-model="table.borderCollapse" ng-true-value="'y'" ng-false-value="'no'"><span id="id1">Do you want border collapse?</span>
+			</div>
+			<div class="form-group">
+				<label id="id1">Table Width and Height</label>
+				<div class="row">
+					<div class="col-md-3 form-group">
+						<label id="id1">Width:</label>
+						<input type="text" ng-model="table.tableWidth" class="form-control">
+					</div>
+					<div class="col-md-3 form-group">
+						<label id="id1">Unit</label>
+						<select class="form-control" ng-model="table.tableWidthUnit">
+							<option value="">----</option>
+							<option value="in">in</option>
+							<option value="px">px</option>
+							<option value="%">%</option>
+						</select>
+					</div>
+					<div class="col-md-3 form-group">
+						<label id="id1">Height:</label>
+						<input type="text" ng-model="table.tableHeight" class="form-control">
+					</div>
+					<div class="col-md-3 form-group">
+						<label id="id1">Unit</label>
+						<select class="form-control" ng-model="table.tableHeightUnit">
+							<option value="">----</option>
+							<option value="in">in</option>
+							<option value="px">px</option>
+							<option value="%">%</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<label id="id1">Horizontal Alignment</label>
+				<select class="form-control" ng-model="table.horizontalAlign">
+					<option value="">--Select--</option>
+					<option value="left">Left</option>		
+					<option value="right">Right</option>
+					<option value="center">Center</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label id="id1">Vertical Alignment</label>
+				<select class="form-control" ng-model="table.verticalAlign">
+					<option value="">--Select--</option>
+					<option value="top">Top</option>
+					<option value="bottom">Bottom</option>
+					<option value="middle">Middle</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<label id="id1">Table Padding</label>
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label id="id1">Padding</label>
+						<input type="text" ng-model="table.tablePadding" class="form-control">
+					</div>
+					<div class="col-md-4 form-group">
+						<label id="id1">Unit</label>
+						<select class="form-control" ng-model="table.tablePaddingUnit">
+							<option value="">--Select--</option>
+							<option value="in">in</option>
+							<option value="px">px</option>
+							<option value="%">%</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="checkbox" ng-model="table.horizontalDividers" ng-true-value="'Yes'" ng-false-value="'No'"><span id="#id1">Do you want Horizontal dividers table</span>
+			</div>
+			<div ng-if="table.horizontalDividers=='Yes'">
+				<div class="form-group">
+					<label id="id1">Horizontal Dividers:</label>
+					<br>
+					<div class="row">
+						<div class="col-md-4 form-group">
+							<label id="id1">Border Width:</label>
+							<input type="number" class="form-control" ng-model="table.horizontalborderWidth" min="1" max="5"> 
+						</div>
+						<div class="col-md-4 form-group">
+							<label id="id1">Border Style:</label>
+							<select class="form-control" ng-model="table.horizontalborderStyle" >
+								<option value="">--Select--</option>
+								<option value="dotted">dotted</option>
+								<option value="dashed">dashed</option>
+								<option value="solid">solid</option>
+								<option value="double">double</option>
+								<option value="groove">groove</option>
+								<option value="ridge">ridge</option>
+								<option value="inset">inset</option>
+								<option value="outset">outset</option>
+								<option value="none">none</option>
+								<option value="hidden">hidden</option>
+							</select>
+						</div>
+						<div class="col-md-4 form-group">
+							<label id="id1">Border Color:</label>
+							<input type="color" class="form-control" ng-model="table.horizontalborderColor"> 
+						</div>
+					</div>
+				</div> 
+			</div>
+			<div class="form-group">
+				<input type="checkbox" ng-model="table.hovertable" ng-true-value="'Yes'" ng-false-value="'No'"><span id="#id1">Do you want Hoverable table</span>
+			</div>
+			<div ng-if="table.hovertable=='Yes'">
+				<div class="form-group">
+					<label id="id1">Choose color</label>
+					<input type="color" class="form-control" style="width:50%" ng-model="table.hovertableColor">
+				</div>
+			</div>
+			<div class="form-group">
+				<input type="checkbox" ng-model="table.stripedtable" ng-true-value="'Yes'" ng-false-value="'No'"><span id="#id1">Do you want Striped table</span>
+			</div>
+			<div ng-if="table.stripedtable=='Yes'">
+				<div class="form-group">
+					<label id="id1">Choose color</label>
+					<input type="color" class="form-control" style="width:50%" ng-model="table.stripedtableColor"><br>
+					<label id="id1">Choose position: </label>
+					<select class="form-control" ng-model="table.stripedtableValue" >
+						<option value="">--Select--</option>
+						<option value="even">Even</option>
+						<option value="odd">Odd</option>
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label id="id1">Table Color</label><br>
+				<label id="id1">Choose Background Color:</label>
+				<input type="color" class="form-control" style="width:50%" ng-model="table.tableBackgroundColor"><br>
+				<label id="id1">Choose Text Color:</label>
+				<input type="color" class="form-control" style="width:50%" ng-model="table.tableTextColor"><br>
+			</div>
+			<div class="form-group">
+				<input type="checkbox" ng-model="table.responsivetable" ng-true-value="'Yes'" ng-false-value="'No'"><span id="#id1">Do you want Responsive table</span>
+			</div>
+		</div>
+	</div>
+</div>
+<br><br><br>
+ <div class="col-md-4 col-md-offset-4 border" style="background-color:#5E7175;">
+	<div class="col-md-4 col-md-offset-1"> 
+    	<input type="button" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate" ng-click="dtablefunc()">
+    </div>
+   	<div class="col-md-4 col-md-offset-2">
+    	<input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Send">
+    </div>
+</div>
+</body>
+</html>

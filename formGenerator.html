@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Form Generator</title>
+<script type="text/javascript" src="js/angular.js"></script>
+<script type="text/javascript" src="js/Properties.js"></script>
+<script type="text/javascript" src="js/Application.js"></script>
+<script type="text/javascript" src="js/Controller.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+.scrollable {
+    height: 250px; /* or any value */
+    overflow-y: auto;
+}
+body{
+       background-image: url(images/formbg.jpg);
+       background-repeat: no-repeat;
+       background-size: cover;
+}
+.border{
+       border-radius: 25px;
+       padding: 20px;
+}
+.buttonStyle{
+       font-size:12px;
+       width:100%; 
+}
+</style>
+</head>
+<body ng-app="Application">
+<div class="container-fluid">
+       <div>
+              <div class="row">
+                     <h2 class="text-center">Form Generator</h2>
+              </div>
+       </div>
+       <div class="col-md-4 col-md-offset-1 border" style="background-color:#b3b6bc;">
+       
+       
+              <div class="checkbox col-md-offset-1 form-group">
+                     <input type="checkbox" ng-model="form.formLabel" ng-true-value="'Y'" ng-false-value="'N'"><b>Label with Textbox</b>
+              </div>
+              <div ng-if="form.formLabel=='Y'" class="col-md-offset-1">
+                     <div class="form-group">
+                           <label>Label name</label>
+                           <input type="text" class="form-control" style="width:100%" ng-model="form.formLabelName" placeholder="Enter label name">
+                     </div>
+              </div>
+              
+              
+              <div class="checkbox col-md-offset-1 form-group">
+                     
+                     <input type="checkbox" ng-model="form.formRadio" ng-true-value="'Y'" ng-false-value="'N'"><b>Radio Button</b>
+              
+              </div>
+              <div ng-if="form.formRadio=='Y'" class="col-md-offset-1">
+                     <div class="form-group">
+                           <label>No of radio buttons</label>
+                           <input type="text" class="form-control" style="width:100%" ng-model="form.formRadioItems" placeholder="Enter no. of radio buttton required">
+                     </div>
+              </div>
+              
+              
+              <div class="checkbox col-md-offset-1">
+                     
+                     <input type="checkbox" ng-model="form.formCheck" ng-true-value="'Y'" ng-false-value="'N'"><b>CheckBox</b>
+                     
+              </div>
+              <div ng-if="form.formCheck=='Y'" class="col-md-offset-1">
+                     <div class="form-group">
+                           <label>No of checkboxes</label>
+                           <input type="text" class="form-control" style="width:100%" ng-model="form.formCheckItems" placeholder="Enter no. of ckeckboxes required">
+                     </div>
+              </div>
+              
+              
+              <div class="checkbox col-md-offset-1">
+                     
+                     <input type="checkbox" ng-model="form.formDropdown" ng-true-value="'Y'" ng-false-value="'N'"><b>Dropdown</b>
+                     
+              </div>
+              <div ng-if="form.formDropdown=='Y'" class="col-md-offset-1">
+                     <div class="form-group">
+                           <label>No of dropdownlist</label>
+                           <input type="text" class="form-control" style="width:100%"  ng-model="form.formDropdownItems" placeholder="Enter no. of dropdownlist required">
+                     </div>
+              </div>
+              
+              
+              <div class="checkbox col-md-offset-1">
+                     
+                     <input type="checkbox" ng-model="form.formText" ng-true-value="'Y'" ng-false-value="'N'"><b>Text Area</b>
+                     
+              </div>
+              <div ng-if="form.formText=='Y'" class="col-md-offset-1">
+                     <div class="form-group">
+                           <label>No of rows</label>
+                           <input type="text" class="form-control" style="width:100%"  ng-model="form.formTextRow" placeholder="Enter no. of rows required">
+                     </div>
+                     <div class="form-group">
+                           <label>No of columns</label>
+                           <input type="text" class="form-control" style="width:100%"  ng-model="form.formTextColumn" placeholder="Enter no. of columns required">
+                     </div>
+              </div>
+              
+              
+              <div class="checkbox col-md-offset-1">
+                     
+                     <input type="checkbox" ng-model="form.formButton" ng-true-value="'Y'" ng-false-value="'N'"><b>Button</b>
+                     
+              </div>
+              
+              
+              <div class="row">
+                     <div class="col-md-6"> 
+                           <input type="button" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate HTML" ng-click="nameClickFunction()">
+                     </div>
+                     <div class="col-md-6">
+                          <a href="api/Form/Form.html"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download HTML"></a>
+                     </div>
+              </div>
+              <br>
+              <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                           <input type="button" class="btn btn-warning btn-lg btn-block buttonStyle" ng-click="myfunc()" ng-model="formValue" value="ShowPreview">
+                    </div>
+                    <div class="col-md-3"></div>
+              </div>
+              <br>
+              <div class="row">
+                    <div ng-show="formValue" class="scrollable" style="background-color: white">
+                                  <span ng-bind-html="formValue"></span>
+                            </div>
+                       </div>
+       </div>
+       
+              <div class="col-md-4 col-md-offset-2 border" style="background-color:#b3b6bc;">
+                    <div class="form-group">
+            <label>Styling input fields</label>
+                <div class="form-group col-md-offset-1">
+                    <div class="form-group">
+                          <label>Width size</label>
+                        <input type="text" class="form-control" style="width:100%" ng-model="cssform.formWidthSize" placeholder="in %">
+                    </div>
+                    <label>Padding within the input</label>
+                    <div class="row form-group">
+                          <div class="col-md-6">
+                          <input type="text" class="form-control"  style="width:100%"  ng-model="cssform.formPaddingSize1" placeholder="in px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formPaddingSize2" placeholder="in px">
+                        </div>
+                    </div>
+                    <label>Margin between inputs</label>
+                    <div class="row form-group">
+                          <div class="col-md-6">
+                         <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formMarginSize1" placeholder="in px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formMarginSize2" placeholder="in px">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                          <label>Border radius</label>
+                        <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formRadiusSize" placeholder="in px">
+                    </div>
+                     </div>
+                 <label>Styling submit button</label>
+                 <div class="col-md-offset-1 form-group">
+                    <div class="form-group">
+                          <label>Width</label>
+                        <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formButtonWidth" placeholder="in %">
+                    </div>
+                    <div class="row">
+                          <div class="form-group col-md-6">
+                          <label>button Color</label>
+                            <input type="color" class="form-control"  style="width:100%"  ng-model="cssform.formButtonColor">
+                        </div>
+                        <div class="form-group col-md-6">
+                                 <label>font Color</label>
+                            <input type="color" class="form-control"  style="width:100%" ng-model="cssform.formButtonFontColor">
+                        </div>
+                   </div>
+                    <label>Padding within the input</label>
+                    <div class="row form-group">
+                          <div class="col-md-6">
+                                 <input type="text" class="form-control"  style="width:100%"  ng-model="cssform.formButtonPaddingSize1" placeholder="in px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control"  style="width:100%" ng-model="cssform.formButtonPaddingSize2" placeholder="in px">
+                        </div>
+                    </div>
+                    <label>Margin between inputs</label>
+                          <div class="row form-group">
+                          <div class="col-md-6">
+                                 <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formButtonMarginSize1" placeholder="in px">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="text" class="form-control"  style="width:100%" ng-model="cssform.formButtonMarginSize2" placeholder="in px">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                          <label>Border radius</label>
+                            <input type="text" class="form-control" style="width:100%"  ng-model="cssform.formButtonRadiusSize" placeholder="in px">
+                        </div>
+                     </div>
+                     <label>Styling Submit Hover</label>
+                          <div class="col-md-offset-1 form-group">
+                          <div class="form-group">
+                                 <label>Button hover color</label>
+                                <input type="color" ng-model="cssform.formButtonHoverColor" class="form-control"  style="width:100%"  placeholder="in px" style="width: 33.33%">
+                            </div>
+                        </div>
+           </div>
+           <div class="row">
+            <div class="col-md-6">
+                    <input type="button" value="Generate CSS" ng-click="cssnameClickFunction()" class="btn btn-success btn-lg buttonStyle">
+                </div>
+                <div class="col-md-6">
+                                  <a href="api/Form/FormCSS.css"><input type="button" class="buttonStyle btn btn-primary btn-lg btn-block" value="Download CSS"></a>
+                           </div>
+           </div>
+       </div>
+</div>
+</body>
+</html>

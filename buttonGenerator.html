@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/Properties.js"></script>
+<script src="js/Application.js"></script>
+<script src="js/Controller.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+.scrollable {
+    height: 250px; /* or any value */
+    overflow-y: auto;
+}
+body{
+       background-image: url(images/buttonbg.jpg);
+       background-repeat: no-repeat;
+       background-size: cover;
+}
+.border{
+       border-radius: 25px;
+       padding: 20px;
+}
+.buttonStyle{
+       font-size:12px;
+}
+</style>
+</head>
+<body  ng-app="Application">
+<div class="container-fluid">
+       <div>
+              <div class="row">
+                     <h2 class="text-center">Button Generator</h2>
+              </div>
+       </div>
+       <br>
+       <div class="row">
+              <div class="col-md-4 col-md-offset-1 border" style="background-color: #8192a2;">
+                     <br>
+                    <div class="form-group">
+                           <label> Type:</label>
+                           <select class = "form-control" ng-model="button.type" style="width:75%" required="required">
+                           <option value="">--Select--</option>
+                           <option value="button">Button</option>
+                           <option value="submit">Submit</option>
+                           <option value="reset">Reset</option>
+                           </select > 
+                            <br> <br>
+                    </div>
+                    <div class="form-group">
+                           <label> Text: </label>
+                           <input type ="text" class = "form-control" ng-model="button.text" style="width:75%" required="required"><br>
+                    </div>
+                    <div class="form-group">
+                           <label> Name: </label>
+                           <input type ="text" class = "form-control" style="width:75%" ng-model="button.name"><br>
+                    </div>
+                    <div class="form-group">
+                           <label> Target:</label>
+                           <select class = "form-control" ng-model="button.target" style="width:75%" required="required">
+                           <option value="">--Select--</option>
+                           <option value="_self">self</option>
+                           <option value="_blank">blank</option>
+                           <option value="_parent">parent</option>
+                           <option value="_top">top</option>
+                           </select > 
+                            <br> <br>
+                    </div>
+                    <div class="form-group">
+                           <label> Autofocus:</label>
+                           <select class = "form-control" ng-model="button.autofocus" style="width:75%" required="required">
+                           <option value="">--Select--</option>
+                           <option value="no">No</option>
+                           <option value="yes">Yes</option>
+                           </select > 
+                            <br> <br>
+                    </div>
+                    <div class="form-group">
+                           <label> Disabled:</label>
+                           <select class = "form-control" ng-model="button.disabled" style="width:75%" required="required">
+                           <option value="">--Select--</option>
+                           <option value="no">No</option>
+                           <option value="yes">Yes</option>
+                           </select > 
+                            <br> <br>
+                    </div>
+                    <div class="row">
+                           <div class="col-md-6">
+                                  <input type="submit" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate HTML" ng-click="buttonClickFunction()">
+                           </div>
+                           <div class="col-md-6">
+                                  <a href="api/Button/Button.html"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download HTML" ></a>
+                           </div>
+                     </div>
+                     <br>
+              <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                           <input type="button" class="btn btn-warning btn-lg btn-block buttonStyle" ng-click="myfunc()" ng-model="buttonValue" value="HTML Preview">
+                    </div>
+                    <div class="col-md-3"></div>
+              </div>
+              <br>
+              <div class="row">
+                    <div ng-show="buttonValue" class="scrollable" style="background-color: white">
+                                  <span ng-bind-html="buttonValue"></span>
+                            </div>
+                       </div>
+                     <br>
+              </div>
+        <div class="col-md-4 col-md-offset-2 border" style="background-color: #8192a2;">
+            <div class="form-group">
+            <label>Select the type of button:</label>
+                 <select class="form-control" ng-model="cssbutton.type" >
+                    <option value="">--Select--</option>
+                    <option value="b1">Button Type 1</option>
+                    <option value="b2">Button Type 2</option>
+                 </select>
+            </div>
+            <div ng-switch="cssbutton.type" class="form-group">
+            <div ng-switch-when="b1" class="form-group">
+                           <div class="form-group">
+                        <label>Width</label>
+                        <input type="text" class="form-control" ng-model="cssbutton.width" placeholder="in %">
+                    </div>
+                    <div class="row">
+                          <div class="form-group col-md-6">
+                          <label>button Color</label>
+                            <input type="color" class="form-control" ng-model="cssbutton.color">
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label>font Color</label>
+                            <input type="color" class="form-control" ng-model="cssbutton.fontcolor">
+                       </div>
+                        </div>
+                    <label>Padding within the input</label>
+                    <div class="row form-group">
+                          <div class="col-md-6">
+                         <input type="text" class="form-control" ng-model="cssbutton.paddingValue1" placeholder="in px">
+                         </div>
+                         <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="cssbutton.paddingValue2" placeholder="in px">
+                         </div>
+                    </div>
+                    <label>Margin between inputs</label>
+                    <div class="row form-group">
+                          <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="cssbutton.marginValue1" placeholder="in px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="cssbutton.marginValue2" placeholder="in px">
+                        </div>
+                    </div>
+                    <div class="row">
+                            <div class="col-md-6 form-group">
+                           <label>Text Align</label>
+                             <select class="form-control" ng-model="cssbutton.textAlign" style="width: 66.66%">
+                                 <option value="">--Select--</option>
+                                <option value="left">left</option>
+                                <option value="right">Right</option>
+                                <option value="center">Center</option>
+                             </select>    
+                          </div>
+                          <div class="col-md-6 form-group">
+                                 <label>Font Size</label>
+                                <input type="text" ng-model="cssbutton.fontSize" class="form-control" placeholder="in px">
+                          </div>
+                     </div>
+                     <div class="form-group">
+                          <label>Border radius</label>
+                        <input type="text" class="form-control" ng-model="cssbutton.radius" placeholder="in px">
+                     </div>
+                 </div>
+                 <div ng-switch-when="b2" class="form-group">
+                    <div class="row">
+                           <div class="form-group col-md-6">
+                          <label>Width</label>
+                            <input type="text" class="form-control" ng-model="cssbutton.width" placeholder="in %">
+                        </div>
+                        <div class="form-group col-md-6">
+                                 <label>font Color</label>
+                            <input type="color" class="form-control" ng-model="cssbutton.fontcolor">
+                        </div>
+                     </div>
+                     <label>Border styling</label>
+                     <div class="row form-group">
+                        <div class="col-md-4">
+                           <input type="text" class="form-control" ng-model="cssbutton.borderSize" placeholder="in px">
+                        </div>
+                        <div class="col-md-4">
+                           <select class="form-control" ng-model="cssbutton.borderStyle" > 
+                               <option value="">--Select--</option> 
+                               <option value="dotted">dotted</option> 
+                               <option value="dashed">dashed</option> 
+                               <option value="solid">solid</option> 
+                               <option value="double">double</option> 
+                               <option value="groove">groove</option> 
+                               <option value="ridge">ridge</option> 
+                               <option value="inset">inset</option> 
+                               <option value="outset">outset</option> 
+                               <option value="none">none</option> 
+                               <option value="hidden">hidden</option> 
+                           </select>
+                       </div>
+                       <div class="col-md-4">
+                                 <input type="color" class="form-control" ng-model="cssbutton.borderColor">
+                       </div>
+                    </div>
+                    <label>Padding within the input</label>
+                    <div class="row form-group">
+                       <div class="col-md-6">
+                           <input type="text" class="form-control" ng-model="cssbutton.paddingValue1" placeholder="in px">
+                       </div>
+                       <div class="col-md-6">
+                                 <input type="text" class="form-control" ng-model="cssbutton.paddingValue2" placeholder="in px">
+                       </div>
+                   </div>
+                    <label>Margin between inputs</label>
+                    <div class="row form-group">
+                        <div class="col-md-6">
+                          <input type="text" class="form-control" ng-model="cssbutton.marginValue1" placeholder="in px">
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" ng-model="cssbutton.marginValue2" placeholder="in px">
+                        </div>
+                    </div>
+                    <div class="row">
+                          <div class="col-md-6 form-group">
+                          <label>Text Align</label>                                                       
+                            <select class="form-control" ng-model="cssbutton.textAlign" style="width: 66.66%">
+                                 <option value="">--Select--</option>
+                                <option value="left">left</option>
+                                <option value="right">Right</option>
+                                <option value="center">Center</option>
+                            </select>    
+                        </div>
+                        <div class="col-md-6 form-group">
+                          <label>Font Size</label>
+                            <input type="text" ng-model="cssbutton.fontSize" class="form-control" placeholder="in px">
+                       </div>
+                   </div>
+                   <div class="form-group">
+                       <label>Border radius</label>
+                       <input type="text" class="form-control" ng-model="cssbutton.radius" placeholder="in px">
+                   </div>
+                    </div>
+             </div>
+            <div class="form-group">
+                    <input type="checkbox" ng-model="cssbutton.hoverAnimations" ng-true-value="'Y'" ng-false-value="'N'"><label>Do you need hover animations?</label>
+             </div>
+             <div ng-if="cssbutton.hoverAnimations=='Y'">
+                    <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>transistion duration</label>
+                        <input type="text" class="form-control" ng-model="cssbutton.hoverTransistion" placeholder="in sec">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>hover Color</label>
+                        <input type="color" class="form-control" ng-model="cssbutton.hoverColor">
+                    </div>
+                 </div>
+            </div>
+            <div class="form-group">
+                <input type="checkbox" ng-model="cssbutton.Animations" ng-true-value="'Y'" ng-false-value="'N'"><label>Do you need extra animations?</label>
+            </div>
+            <div ng-if="cssbutton.Animations=='Y'">
+            <div class="form-group">
+                    <select class="form-control" ng-model="cssbutton.Animationstype"> 
+                       <option value="">--Select--</option>
+                       <option value="press">Pressed Efect</option>
+                       <option value="fadein">fade in Effect</option>
+                    </select>
+                 </div>
+                 <div ng-switch="cssbutton.Animationstype">
+                     <div ng-switch-when="press" class="form-group">
+                         <div class="row">
+                            <div class="form-group col-md-6">
+                                 <label>hover background color</label>
+                                <input type="color" ng-model="cssbutton.pressedHoverColor" class="form-control">
+                            </div>
+                         <div class="form-group col-md-6" >
+                                   <label>active background color</label>
+                                   <input type="color" ng-model="cssbutton.pressedActiveColor" class="form-control">
+                           </div>
+                         <div class="form-group col-md-6" >
+                             <label>Y axis transform</label>
+                                   <input type="text" ng-model="cssbutton.pressedTransform" placeholder="in px" class="form-control">
+                         </div>
+                           </div>
+                      </div>
+                      <div ng-switch-when="fadein">
+                          <div class="form-group">
+                            <label>Hover Opacity</label>
+                            <input type="text" class="form-control" ng-model="cssbutton.fadeInOpacity" placeholder="0.0 to 1.0"> 
+                          </div>
+                      </div>
+                 </div>
+            </div>
+            <div class="row">
+               <div class="col-md-6">
+                  <input type="button" value="Generate CSS" ng-click="cssbuttonClickFunction()" class="btn btn-success btn-lg buttonStyle">
+               </div>
+               <div class="col-md-6">
+                   <a href="api/Button/Buttoncss.css"><input type="button" value="Download CSS" class="btn btn-primary btn-lg btn-block buttonStyle"></a>
+               </div>
+            </div>
+       </div>
+</div>
+</body>
+</html>

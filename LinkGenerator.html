@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Link Generator</title>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/angular.js"></script>
+<script src="js/Properties.js"></script>
+<script src="js/Application.js"></script>
+<script src="js/Controller.js"></script>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.1/angular.min.js"></script>
+<link rel="stylesheet" href="css/bootstrap.css">
+<style>
+.linkstyle1{
+       text-decoration: none;
+}
+.scrollable {
+    height: 250px; /* or any value */
+    overflow-y: auto;
+}
+body{
+       background-image: url(images/linksbg.jpg);
+       background-repeat: no-repeat;
+       background-size: cover;
+}
+.border{
+       border-radius: 25px;
+       padding: 20px;
+}
+.buttonStyle{
+       font-size:12px;
+}
+</style>
+</head>
+<body ng-app="Application">
+<div class="container-fluid">
+       <div>
+              <div class="row">
+                     <h2 class="text-center">Link Generator</h2>
+              </div>
+       </div>
+       <div class="col-md-4 col-md-offset-1 border" style="background-color: #A6AAB6;">
+       <br><br>
+              <div class="form-group">
+              <h4>URL:</h4><input type="text" class="form-control" ng-model="link.url" value="http://">
+              </div>
+              <div class="form-group">
+              <h4>Text:</h4><input type="text" class="form-control" ng-model="link.text">
+              </div>
+              <div class="form-group">
+              <h4>Title:</h4><input type="text" class="form-control" ng-model="link.title">
+              </div>
+              <div class="form-group">
+              <h4>Target:</h4>
+              <select class="form-control" ng-model="link.target">
+              <option value="">--Select--</option>
+              <option value="Default">Default</option>
+              <option value="blank">blank</option>
+              <option value="parent">parent</option>
+              <option value="self">self</option>
+              <option value="top">top</option>
+              </select>
+              </div>
+              <div class="form-group">
+              <h4>Rel:</h4>
+              <select class="form-control" ng-model="link.rel">
+              <option value="">--Select--</option>
+              <option value="Default">Default</option>
+              <option value="alternate">alternate</option>
+              <option value="author">author</option>
+              <option value="bookmark">bookmark</option>
+              <option value="extrenal">extrenal</option>
+              <option value="help">help</option>
+              <option value="license">license</option>
+              <option value="next">next</option>
+              <option value="nofollow">nofollow</option>
+              <option value="noreferrer">noreferrer</option>
+              <option value="noopener">noopener</option>
+              <option value="prev">prev</option>
+              <option value="search">search</option>
+              <option value="tag">tag</option>
+              
+              </select>
+              </div>
+              <div class="row">
+                     <div class="col-md-6">
+                           <input type="button" class="btn btn-success btn-lg btn-block buttonStyle" value="Generate Html" ng-click="linkClickFunction()"> 
+                     </div>
+                     <div class="col-md-6">
+                           <a href="api/Link/Link.html" class="linkstyle1"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download HTML"></a>
+                     </div>
+       </div>
+       <br>
+              <div class="row">
+                    <div class="col-md-3"></div>
+                    <div class="col-md-6">
+                           <input type="button" class="btn btn-warning btn-lg btn-block buttonStyle" ng-click="myfunc()" ng-model="linkValue" value="Show Preview">
+                    </div>
+                    <div class="col-md-3"></div>
+              </div>
+              <br>
+              <div class="row">
+                    <div ng-show="linkValue" class="scrollable" style="background-color: white">
+                                  <span ng-bind-html = "linkValue"></span>
+                            </div>
+                       </div>
+       </div>
+       <div class="col-md-4 col-md-offset-2 border" style="background-color: #a6aab6;">
+              <div class="row form-group">
+                     <div class="col-md-3">
+                           <label>Link:</label>
+                           <input type="color" class="form-control" ng-model="linkcss.link">
+                     </div>
+                     <div class="col-md-3">
+                           <label>Visited:</label>
+                           <input type="color" class="form-control"  ng-model="linkcss.visited">
+                     </div>
+                     <div class="col-md-3">
+                           <label>Hover:</label>
+                           <input type="color" class="form-control"  ng-model="linkcss.hover">
+                     </div>
+                     <div class="col-md-3">
+                           <label>Active:</label>
+                           <input type="color" class="form-control"  ng-model="linkcss.active">
+                     </div>
+              </div>
+              <div class="form-group">
+                     <div class="row">
+                           <div class="col-md-8">
+                                  <label>Text Decoration:</label>
+                                  <select name="" class="form-control" ng-model="linkcss.textDecoration">
+                                         <option value="">--Select--</option>
+                                         <option value="underline">underline</option>
+                                        <option value="overline">overline</option>
+                                         <option value="line-through">line-through</option>
+                                         <option value="none">none</option>
+                                  </select>
+                           </div>
+                     </div>
+              </div>
+              <label>Background Color:</label>
+              <div class="form-group">
+                     <input type="checkbox" ng-model="linkcss.backgroundAnimation" ng-true-value="'Y'" ng-false-value="'N'"><label>Do you need background animations?</label>
+              </div>
+              <div ng-if="linkcss.backgroundAnimation=='Y'" >
+                     <div class="row">
+                           <div class="col-md-3">
+                                  <label>Link:</label>
+                                  <input type="color" class="form-control" ng-model="linkcss.bgLink">
+                           </div>
+                           <div class="col-md-3">
+                                  <label>Visited:</label>
+                                  <input type="color" class="form-control" ng-model="linkcss.bgVisited">
+                           </div>
+                           <div class="col-md-3">
+                                  <label>Hover:</label>
+                                  <input type="color" class="form-control" ng-model="linkcss.bgHover">
+                           </div>
+                           <div class="col-md-3">
+                                  <label>Active:</label>
+                                  <input type="color" class="form-control"  ng-model="linkcss.bgActive">
+                           </div>
+                     </div>
+              </div>
+                     
+              <br>
+              <div class="row">
+                     <div class="col-md-6">
+                           <input type="submit" class="btn btn-success btn-block btn-lg buttonStyle" value="Generate CSS" ng-click="linkCssClickFunction()">
+                     </div>
+                     <div class="col-md-6">
+                           <a href="api/Link/LinkCss.css" class="linkstyle1"><input type="button" class="btn btn-primary btn-lg btn-block buttonStyle" value="Download CSS"></a>
+                     </div>
+              </div> </div>
+</div> 
+</body>
+</html>
